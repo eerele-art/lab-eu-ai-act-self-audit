@@ -5,9 +5,8 @@
 This repository contains everything you need for this lab.
 
 ## Files
-
-- [`instructions.md`](./instructions.md) — the lab instructions
-- [`rubric.md`](./rubric.md) — how your submission is graded; this is what the AI reviewer checks your PR against
+- [`mira_eu_ai_act_compliance_.md`](mira_eu_ai_act_compliance_assessment.md) — MIRA system brief, risk classification, role map, gap analysis, remediation plan, and compliance memo
+- [`mira_end_user__transparency_notice.md`](mira_end_user_ai_transparency_notice.md) — stretch deliverable: draft transparency notice for MIRA users
 
 ## How to complete this lab
 
