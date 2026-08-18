@@ -1,0 +1,160 @@
+# MIRA â€” EU AI Act Compliance Assessment
+
+**Project:** MIRA, Project 3 MVP  
+**Assessment date:** 18 August 2026  
+**Prepared for:** Course lab submission  
+**Assessment type:** First-pass review, not legal advice
+
+## Phase 1 â€” System brief
+
+MIRA is an AI-assisted tool that helps a person turn their identity, preferences, and visual references into a practical direction for a personal-brand photoshoot. It does not decide whether the person is suitable for a job, service, benefit, or other opportunity. Its purpose is creative planning.
+
+The user completes a structured questionnaire. The MVP uses approximately 20 questions: a group of scaled questions that contribute to five creative or personality dimensions, followed by scenario-based questions about colour, setting, light, energy, styling, and camera comfort. The user may also provide a name or contact details and upload personal photographs or inspiration images. The information comes directly from the user rather than from automated web scraping. Questionnaire answers, contact details, and identifiable photographs are personal data. Images of other identifiable people are also personal data. Some free-text answers or references could incidentally reveal sensitive information, although MIRA is not intended to request it.
+
+The workflow receives the form submission, records relevant data, applies scoring logic, and sends the resulting profile and references to configured text- and image-generation services. The MVP uses Tally for input, n8n for workflow orchestration, Google Sheets and Google Docs for storage and reporting, and a MIRA web application hosted on Railway. The exact model names and versions used for text and image generation must be added to the production system inventory.
+
+MIRA outputs a written â€œCreative DNAâ€ interpretation and recommendations for mood, colours, styling, lighting, location, posing, and shoot preparation. It can also produce a moodboard or five-image â€œBrand Worldâ€ containing synthetic images. The questionnaire scores are intermediate creative signals; they are not eligibility or risk scores. The output is a recommendation and generated content, not a binding decision.
+
+The person portrayed is most directly affected because the output describes their identity and may shape how they present themselves publicly. A photographer or creative team may also rely on the report when preparing the shoot. The user and photographer are expected to review, edit, reject, or replace every recommendation before it is used. MIRA does not automatically book a shoot, set a price, publish an image, or take another consequential action.
+
+The MVP was designed and configured by the MIRA Project 3 team using third-party platforms and generative-AI services. In production, MIRA could be offered directly to individuals or used by photographers and studios with their clients.
+
+## Phase 2 â€” Risk-tier classification
+
+| Question | Your answer |
+| --- | --- |
+| Does this system fall under any prohibited category (Article 5)? | **No.** MIRA does not use subliminal or deceptive manipulation to cause significant harm, exploit protected vulnerabilities, perform social scoring, scrape facial images, infer emotions from biometric data, or perform prohibited biometric categorisation or identification. Its preference and personality-style questionnaire is based on answers voluntarily supplied for creative guidance; it is not biometric emotion recognition. |
+| Does this system operate in any of the eight Annex III areas? | **No.** Its intended purpose is creative brand and photoshoot planning. It is not used for biometrics, critical infrastructure, access to education, employment, essential services, law enforcement, migration or asylum, justice, or elections. |
+| If Annex III: does it â€œsignificantly influenceâ€ decisions in that area, or is it narrow/preparatory? | **Not applicable.** The system is outside the listed areas and does not determine access to an opportunity or service. |
+| Does this system interact with end users or generate content requiring disclosure (Article 50)? | **Yes.** Users receive AI-generated recommendations and synthetic images. Article 50(1) is relevant where the interface directly interacts with users. Article 50(2) is relevant to machine-readable marking of synthetic output. Article 50(4) is conditionally relevant when photorealistic images resemble a real person and could falsely appear authentic. |
+| First-pass risk tier | **Limited risk / transparency** |
+| One-sentence justification citing the specific article or Annex entry | MIRA is outside Article 5 and Annex III but falls within the transparency tier because it presents AI-generated content and may directly interact with natural persons within Article 50(1)â€“(2), while realistic images resembling the user may also require deployer disclosure under Article 50(4). |
+
+### Classification rationale
+
+MIRA should be classified as **limited risk / transparency**, not high-risk. Its intended purpose is to create optional, reversible creative recommendations. It neither operates in an Annex III domain nor materially determines access to education, employment, credit, public services, law enforcement decisions, migration decisions, justice, or political participation. It also does not perform an Article 5 prohibited practice. The relevant regulatory concern is transparency: the user must understand when AI is involved, and synthetic content must be handled in accordance with Article 50. If MIRA were later repurposed to assess job applicantsâ€™ â€œbrand fit,â€ analyse emotions from faces, or rank workers, this conclusion would have to be revisited because the intended purpose and deployment context would have changed.
+
+### Ambiguities requiring confirmation
+
+- Article 50(1) may be less central if the final product is only a static form followed by a report and AI involvement is already obvious. The safer design is still to disclose AI use before submission and again with the result.
+- Article 50(4) applies only where an image meets the Actâ€™s definition of a deep fake: it resembles an existing person, object, place, entity, or event and could falsely appear authentic. Clearly stylised moodboard imagery may not meet that definition. Photorealistic images of the user should be treated as potentially in scope.
+- The final provider/deployer allocation for Article 50(2) depends on the technical architecture, branding, contracts, and whether MIRA itself is considered the provider of the integrated content-generating AI system. Legal review should confirm this before market launch.
+
+## Phase 3 â€” Role map
+
+The Act defines a provider as the entity that develops or has an AI system developed and places it on the market or puts it into service under its own name. A deployer is an entity using an AI system under its authority in a professional activity. A downstream provider may integrate another entityâ€™s AI model into its own system.
+
+For this exercise, **Elzaâ€™s role is co-designer and workflow configurator within the MIRA provider team**, while Marijaâ€™s development work also forms part of that provider activity. The fictional professional photography client is the deployer. This allocation is prospective because the course prototype has not yet been commercially placed on the market.
+
+| Role | Entity | Key AI Act obligations |
+| --- | --- | --- |
+| Provider / downstream provider | **MIRA project team (Elza and Marija for this exercise) or a future MIRA legal entity**, if the integrated product is offered or put into service under the MIRA name | Design the interface so users are informed of direct AI interaction under Article 50(1); determine and implement the applicable machine-readable marking duties for generated content under Article 50(2); provide adequate instructions and preserve relevant vendor information; ensure appropriate AI literacy under Article 4. The high-risk provider duties in Articles 9â€“15, 43, 47â€“49, and 72 do not apply to the current intended purpose. |
+| Deployer | **A professional photographer, studio, agency, or client organisation using MIRA with customers**; MIRA may also act as deployer of embedded vendor systems in its own operations | Ensure staff AI literacy under Article 4; follow instructions; give any required visible disclosure when deploying photorealistic generated or manipulated content that constitutes a deep fake under Article 50(4)â€“(5); comply with applicable data-protection and consumer law. Article 26 high-risk deployer duties do not apply to the present use case. |
+| Affected person / end user | **The individual completing the journey or portrayed in the images** | Receives the transparency information and retains human control over whether to use the output. A person using MIRA only for a personal, non-professional activity is not a deployer under the Article 3 definition. |
+| AI vendor | **The providers of the configured language model and image-generation model/API**; exact vendor, model, version, and region must be entered in the vendor register | They remain providers of their own models or systems and must meet the AI Act duties applicable to those products, including relevant general-purpose AI duties and Article 50(2) marking capabilities. MIRA must not assume that a vendorâ€™s compliance automatically makes the integrated product compliant. |
+| Infrastructure vendor | **Tally, n8n, Google Sheets/Docs, and Railway**, to the extent they provide forms, automation, storage, documents, or hosting rather than an AI system | These services are not automatically AI Act providers for MIRA merely because they form part of the stack. Their more immediate role may be as processors or sub-processors under GDPR. If an embedded AI feature is enabled, that component must be mapped separately. |
+| Importer | **None identified in the MVP** | Reassess if an EU-established entity places on the EU market an AI system bearing the name or trademark of a provider established outside the EU. |
+
+Role allocation is a first-pass map. Contracts, branding, model configuration, and the route by which the product is made available in the EU should be reviewed by counsel before launch.
+
+## Phase 4 â€” High-risk obligation checklist
+
+**Not applicable.** MIRA does not fall within Article 6 and Annex III for its present intended purpose, so the 11-item high-risk provider checklist is intentionally omitted, as directed by the lab. A fresh classification would be required before extending MIRA to recruitment, worker evaluation, education admissions, credit, public benefits, or another Annex III context.
+
+## Phase 5 â€” Applicable obligations and current status
+
+| Requirement | Article / law | Status | Current assessment |
+| --- | --- | --- | --- |
+| Inform people that they are interacting with AI | AI Act 50(1), 50(5) | **Partial** | MIRA is described as AI-assisted, but the MVP has no documented, tested requirement for a clear and accessible notice at the latest at first interaction. |
+| Machine-readable detection of synthetic output | AI Act 50(2) | **Gap / unverified** | The workflow does not document whether the model adds a machine-readable mark, whether it is technically adequate, or whether n8n, Google Docs, the app, and export steps preserve it. |
+| Visible disclosure for deepfake output | AI Act 50(4), 50(5) | **Conditional gap** | No visible labelling rule is documented for photorealistic images that resemble the user and could appear authentic. Evidently artistic output still requires an appropriate disclosure if it constitutes a deep fake, although the notice may be designed not to hamper the work. |
+| Staff and operator AI literacy | AI Act 4 | **Partial** | The team understands the workflow, but there is no role-based instruction for future photographers or staff covering limits, review, disclosures, or prohibited repurposing. |
+| Lawful, fair, transparent personal-data processing | GDPR 5, 6, 13; potentially 9 | **Gap** | The MVP processes questionnaire responses and images across several services without a documented data inventory, lawful-basis analysis, complete privacy notice, or rule for incidentally submitted special-category data. |
+| Processor and international-transfer governance | GDPR 28, 44â€“49 | **Gap / unverified** | Vendor roles, processing terms, hosting regions, sub-processors, and transfer safeguards have not been consolidated and verified. |
+| Data protection by design, security, retention, and rights handling | GDPR 5(1)(c), 5(1)(e), 25, 32; DPIA screening under 35 | **Gap** | No single policy defines minimum necessary fields, access rights, retention periods, deletion across connected systems, security controls, user requests, or whether a DPIA is needed. |
+| Accurate marketing and clear limits | EU consumer-protection law | **Partial** | Human review is possible, but the interface should state that outputs are suggestions, may be inaccurate or stereotyped, and do not guarantee brand success or photographic results. |
+
+## Gap analysis and remediation plan
+
+### Gap 1 â€” First-interaction AI disclosure
+
+- **Obligation:** Articles 50(1) and 50(5): inform the person clearly, distinguishably, accessibly, and no later than the first interaction that they are interacting with an AI system, unless this is already obvious.
+- **Current state:** MIRA is presented as an AI-assisted product, but the MVP does not enforce a standard disclosure before the questionnaire is submitted or when the result appears.
+- **Required state:** The disclosure must not depend only on marketing copy or a terms-of-use link.
+- **Remediation:** Add a short notice above the first questionnaire action and repeat a concise label on the results page. Include accessible text, not only an icon. Store the approved wording in the product requirements and test that it appears on mobile and desktop.
+- **Escalation needed?** **Yes â€” legal review** of the final wording and whether the obviousness exception could apply; product implementation does not need a conformity body.
+
+### Gap 2 â€” Machine-readable provenance of generated content
+
+- **Obligation:** Article 50(2): providers of systems generating synthetic text or images must ensure output is marked in a machine-readable format and detectable as AI-generated or manipulated, subject to the Articleâ€™s technical-feasibility and limited exceptions.
+- **Current state:** MIRA has no verified record of the provenance mechanism supplied by each model or whether later workflow steps strip metadata or other markers.
+- **Required state:** The responsible provider must be able to show that an effective, interoperable, robust, and reliable marking method is implemented as far as technically feasible.
+- **Remediation:** Record the exact model and API version; obtain the vendorâ€™s Article 50 technical documentation; verify output metadata or watermarking; preserve it through storage, resizing, document generation, and download; add automated and manual release tests; document any technical limitation. Do not claim compliance merely because the API vendor claims compliance.
+- **Escalation needed?** **Yes â€” AI engineer, vendor, and AI regulatory counsel.** Confirm the downstream-provider allocation and the effect of any transition rule before launch.
+
+### Gap 3 â€” Visible labelling of realistic generated images
+
+- **Obligation:** Articles 50(4) and 50(5) require a deployer to disclose AI-generated or manipulated image, audio, or video that constitutes a deep fake. The disclosure must be clear, distinguishable, accessible, and timely.
+- **Current state:** Five-image Brand World outputs can be shown without a consistent visible â€œAI-generatedâ€ label. Some images may resemble the user and appear to be real photographs.
+- **Required state:** In-scope images must carry an appropriate human-visible disclosure, including when the content is creative or artistic.
+- **Remediation:** Place â€œAI-generated concept image â€” not an actual photographâ€ beside each generated image and in downloads. Require professional customers to keep the label if they show or publish the image. Add a pre-publication check asking whether the output resembles a real person or event and could appear authentic.
+- **Escalation needed?** **Yes â€” legal review** for edge cases; routine labelling can be implemented by product/design.
+
+### Gap 4 â€” GDPR lawful-basis and transparency package
+
+- **Obligation:** GDPR principles and Articles 6 and 13 require a defined purpose, lawful basis, data minimisation, and transparent information. Article 9 requires an additional condition if special-category data is intentionally processed.
+- **Current state:** The MVP can collect identity answers, contact details, and identifiable photographs through multiple services, but no consolidated record explains each field, purpose, legal basis, recipient, retention period, or user right.
+- **Required state:** Each data element and processing step must be necessary, justified, and explained before collection.
+- **Remediation:** Create a data-flow inventory; remove non-essential fields; choose and document a lawful basis for each purpose; prohibit unnecessary sensitive-data submissions; draft an Article 13 privacy notice; create consent wording where consent is genuinely the correct basis; and define handling for third-party faces in uploaded images.
+- **Escalation needed?** **Yes â€” data-protection counsel or DPO.** The DPO should also screen whether the combination of profiling and image processing requires a DPIA under Article 35.
+
+### Gap 5 â€” Vendor, retention, deletion, and security controls
+
+- **Obligation:** GDPR Articles 25, 28, and 32 and the storage-limitation principle require privacy by design, suitable processor terms, appropriate security, and deletion when data is no longer needed. International transfers require a Chapter V mechanism.
+- **Current state:** Copies may persist in Tally, n8n execution data, Google Sheets/Docs, model-provider logs, and the Railway-hosted application. There is no single deletion or access-control procedure.
+- **Required state:** MIRA must know where data resides, who can access it, how long each copy remains, and how deletion or access requests propagate across vendors.
+- **Remediation:** Sign and catalogue processor agreements; document sub-processors and data regions; review transfer mechanisms; restrict administrator access; separate test and production data; encrypt in transit and at rest; protect API secrets; suppress unnecessary n8n payload logging; propose automatic deletion of raw uploads after 30 days unless the user chooses a shorter period or a justified project period requires longer; and test a complete deletion request across every system.
+- **Escalation needed?** **Yes â€” DPO/privacy counsel and security lead.**
+
+### Gap 6 â€” Operator guidance and substantiated claims
+
+- **Obligation:** Article 4 requires providers and deployers to take measures, to their best extent, to ensure sufficient AI literacy for staff and others operating the system. Consumer-protection rules also prohibit misleading claims and material omissions.
+- **Current state:** The MVP provides human review but no written review checklist, limitation statement, override procedure, or rule against using the creative profile for consequential assessments.
+- **Required state:** Professional users must understand what the system does, its foreseeable errors and stereotypes, when disclosure is required, and that outputs are optional creative suggestions.
+- **Remediation:** Add a short operator guide and onboarding: verify factual details, check for stereotypes and unwanted sensitive inferences, obtain permission for uploaded images, reject unsuitable output, never use MIRA for recruitment or eligibility decisions, retain required labels, and record final human approval. Remove or substantiate claims suggesting guaranteed accuracy, uniqueness, or commercial success.
+- **Escalation needed?** **No** for the first draft; legal review should approve public claims and terms before launch.
+
+## Reinforce â€” retrospective design review
+
+The earlier design decision that creates the greatest compliance burden is routing identifiable photographs and detailed identity responses through several connected services while retaining intermediate copies. That choice increases the number of processors, possible international transfers, access points, retention settings, and deletion steps. If rebuilding the MVP, I would begin with text-only creative direction, make image upload optional, use a direct secured upload path instead of copying images into spreadsheets or general-purpose documents, isolate temporary processing from the long-term report, and automatically delete raw uploads after the generation job. I would also select text and image vendors only after confirming their data-use terms, EU processing options, retention controls, and Article 50 provenance capabilities.
+
+## Phase 6 â€” Compliance memo
+
+**To:** Head of Product, MIRA  
+**From:** Project compliance reviewer  
+**Date:** 18 August 2026  
+**Subject:** First-pass EU AI Act assessment of the MIRA MVP
+
+MIRA should be treated as a **limited-risk AI system subject to transparency duties**, rather than a prohibited or high-risk system. Its intended purpose is personal-brand and photoshoot planning, which is outside the eight Annex III high-risk areas. It generates recommendations and synthetic images but does not make decisions about employment, education, credit, public services, law enforcement, migration, justice, or democratic participation. Articles 50(1)â€“(2) are therefore the main AI Act provisions, with Article 50(4) also relevant when a generated image resembles a real person and could appear authentic.
+
+If MIRA is offered under its own name, the MIRA entity is likely the provider, and more specifically a downstream provider of an integrated AI system. A photographer, studio, or agency using MIRA professionally is a deployer. The text- and image-model vendors remain providers of their respective models or AI components. Form, workflow, storage, document, and hosting vendors are not automatically AI Act providers, but they are likely to have processor or sub-processor roles under GDPR. No importer has been identified. Final role allocation must be confirmed from the commercial structure, contracts, branding, and exact model architecture.
+
+The first key gap is user disclosure. AI involvement may be suggested by the product description, but MIRA has no documented requirement for a clear notice at first interaction. Second, the project has not verified whether generated text and images carry machine-readable AI provenance or whether the workflow preserves it. Third, photorealistic Brand World images are not consistently labelled for people who might mistake them for real photographs. Alongside the AI Act, MIRA has material GDPR work: the MVP lacks a complete data inventory, lawful-basis analysis, privacy notice, processor and transfer review, retention schedule, deletion workflow, and DPIA screening.
+
+Before any public launch, the product team should act in this order. First, freeze the intended purpose and prohibit employment, eligibility, biometric-emotion, or other consequential repurposing without a fresh legal assessment. Second, implement the first-interaction notice and visible labels for generated concept images. Third, complete the model/vendor inventory and test machine-readable provenance through the full export path. Fourth, build the GDPR data map, privacy notice, processor register, retention/deletion process, and security controls. Fifth, provide a short operator guide covering human review, limitations, disclosure, and prohibited uses. AI regulatory counsel should confirm Articles 50(2) and 50(4); a DPO or privacy lawyer should review the GDPR package and DPIA threshold.
+
+This memo is a first-pass educational assessment based on the MVP description available on the assessment date. It is not a legal opinion, conformity assessment, certification, or guarantee of compliance. It does not assess intellectual-property rights in uploaded references or generated images, detailed contract terms, national consumer law, or the actual technical behaviour of an unnamed model version.
+
+## Sources
+
+- [Regulation (EU) 2024/1689 â€” current consolidated text on EUR-Lex](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727)
+- [Article 3 â€” definitions of provider, deployer, importer, downstream provider, and deep fake](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3)
+- [Article 4 â€” AI literacy](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-4)
+- [Article 5 â€” prohibited AI practices](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5)
+- [Article 6 â€” classification rules for high-risk systems](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6)
+- [Annex III â€” high-risk areas](https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3)
+- [Article 50 â€” transparency obligations](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50)
+- [European Commission â€” Code of Practice on Transparency of AI-generated Content](https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content)
+- [EU AI Act Compliance Checker](https://ai-act-service-desk.ec.europa.eu/en/eu-ai-act-compliance-checker)
+- [General Data Protection Regulation â€” official text](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
+- [Directive 2005/29/EC on unfair business-to-consumer commercial practices â€” official text](https://eur-lex.europa.eu/eli/dir/2005/29/oj)
