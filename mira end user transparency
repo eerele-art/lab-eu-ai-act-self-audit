@@ -1,0 +1,41 @@
+MIRA — Draft End-User AI Transparency Notice
+
+Placement: Show the short notice before the user starts or submits the questionnaire. Link to the expanded notice. Repeat the output label beside every generated report and image.
+
+Short notice
+
+MIRA uses artificial intelligence. Your questionnaire answers and any images you choose to upload are processed by AI services to generate creative recommendations and concept images. The output may be inaccurate or reflect stereotypes, so review it before use. It does not make decisions about your access to work, services, or opportunities. [Learn how MIRA uses AI and your data.]
+
+Expanded notice
+
+MIRA uses artificial intelligence to translate the information you provide into a suggested creative direction for a personal-brand photoshoot. It may generate text about mood, styling, colour, lighting, location, and posing, as well as synthetic concept images.
+
+The output is a creative suggestion, not an objective assessment of your identity, personality, attractiveness, professional ability, or likely success. MIRA can misunderstand your answers, produce generic or stereotyped ideas, and generate details that are not true. You or your photographer should review, edit, or reject every result before using it. No output is automatically published and no decision about employment, credit, education, public services, or another opportunity is made by MIRA.
+
+If you upload a photograph, confirm that you have permission to use it. Avoid submitting sensitive information that is not needed for the creative task. Information about the controller, purposes, lawful bases, vendors, transfers, retention periods, and your data-protection rights must be provided in MIRA’s privacy notice before collection.
+
+Output labels
+
+Use the following beside each generated report:
+
+AI-assisted creative recommendation — human review required.
+
+Use the following directly beside and inside every download of a generated concept image:
+
+AI-generated concept image — not an actual photograph.
+
+These visible labels complement, but do not replace, any machine-readable marking required for synthetic output. They must remain attached when an image is shared with a client or published.
+
+Implementation owner and evidence
+
+Product owner: confirms placement and approved wording.
+
+Design/engineering: implements accessible text at first interaction and beside outputs.
+
+AI engineer: verifies that machine-readable provenance survives generation, storage, resizing, and download.
+
+Professional deployer: keeps required labels when sharing or publishing an in-scope generated image.
+
+Evidence retained: screenshots of the notice, accessibility test, model/version register, provenance test result, and release date.
+
+This draft should be approved by AI regulatory counsel and coordinated with the GDPR privacy notice before production use.
